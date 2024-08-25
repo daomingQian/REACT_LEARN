@@ -2,16 +2,17 @@
  * @Author: chenqian 813928419@qq.com
  * @Date: 2024-08-24 11:32:49
  * @LastEditors: chenqian 813928419@qq.com
- * @LastEditTime: 2024-08-25 16:34:37
+ * @LastEditTime: 2024-08-25 19:05:18
  * @FilePath: \REACT_LEARN\src\App.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 
-import './App.css';
+import './App.scss';
 import BasicInfo from './components/BasicInfo/BasicInfo';
 import PoInfo from './components/PoInfo/PoInfo'
 import LogList from './components/LogList/LogList'
 import { useState } from 'react';
+import {message} from 'antd'
 
 export default function App() {
   const [task, setTask] = useState('');
@@ -64,12 +65,23 @@ export default function App() {
 
   // 删除目标任务们
   function deleteTargetTask(taskIdList) {
+    if(taskIdList.length === 0) {
+      message.open({
+        type: 'warning',
+        content: '请选择至少一个选项',
+      });
+      return
+    }
     const taskIdMap = taskIdList.reduce((map, taskId) => {
       map[taskId] = true;
       return map;
     }, {})
     const newTaskList = taskList.filter(item => !taskIdMap[item.id]);
     setTaskList(newTaskList);
+    message.open({
+      type: 'success',
+      content: '删除成功',
+    });
   }
 
   return (
