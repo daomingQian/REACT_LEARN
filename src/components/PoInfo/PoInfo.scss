@@ -1,0 +1,21 @@
+.listBox{
+    margin: 10px 0 10px 0;
+    & .taskItem {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        &:hover {
+            background-color: #ccc;
+            & .deleteBtn {
+                display: block;
+            }
+        }
+        & .task {
+            margin-left: 3px;
+        }
+        & .deleteBtn {
+            display: none;
+        }
+    }
+}
+
